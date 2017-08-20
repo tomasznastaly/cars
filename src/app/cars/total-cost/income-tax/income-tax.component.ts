@@ -3,8 +3,7 @@ import {CostSharedService} from "../../cost-shared.service";
 
 @Component({
   selector: 'cs-income-tax',
-  templateUrl: './income-tax.component.html',
-  styleUrls: ['./income-tax.component.less']
+  templateUrl: './income-tax.component.html'
 })
 export class IncomeTaxComponent implements OnInit {
   private incomeTax : number = 18;
