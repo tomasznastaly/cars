@@ -16,5 +16,4 @@ export class IncomeTaxComponent implements OnInit {
       this.income = cost * this.incomeTax / 100;
     });
   }
-
 }
