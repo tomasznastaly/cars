@@ -60,12 +60,11 @@ export class CarsListComponent implements OnInit {
     });
   }
 
-  goToCarDetails(car : Car) {
+  goToCarDetails(car : Car, event) {
     this.router.navigate(['/cars', car.id]);
   }
 
-  removeCar(car : Car, event) {
-    event.stopPropagation();
+  OnRemovedCar(car : Car) {
     this.carsService.removeCar(car.id).subscribe(() => {
       this.loadCars();
     });
