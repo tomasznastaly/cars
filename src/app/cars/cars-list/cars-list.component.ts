@@ -60,7 +60,7 @@ export class CarsListComponent implements OnInit {
     });
   }
 
-  goToCarDetails(car : Car, event) {
+  goToCarDetails(car : Car) {
     this.router.navigate(['/cars', car.id]);
   }
 
