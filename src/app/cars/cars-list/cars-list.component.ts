@@ -56,6 +56,19 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     });
   }
 
+  togglePlateValidity() {
+    const damageControl = this.carForm.get('isFullyDamaged');
+    const plateControl = this.carForm.get('plate');
+
+    if (damageControl.value) {
+      plateControl.clearValidators();
+    } else {
+      plateControl.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(7)]);
+    }
+
+    plateControl.updateValueAndValidity();
+  }
+
   loadCars() : void {
     this.carsService.getCars().subscribe((cars) => {
       this.cars = cars;
