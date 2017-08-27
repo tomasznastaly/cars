@@ -53,7 +53,12 @@ export class CarsListComponent implements OnInit, AfterViewInit {
       clientSurname: '',
       cost: '',
       isFullyDamaged: '',
-      year: ''
+      year: '',
+      parts: this.formBuilder.group({
+        name: '',
+        inStock: '',
+        price: ''
+      })
     });
   }
 
@@ -79,7 +84,10 @@ export class CarsListComponent implements OnInit, AfterViewInit {
   }
 
   addCar() {
-    this.carsService.addCar(this.carForm.value).subscribe(() => {
+    const carFormData = Object.assign({}, this.carForm.value);
+    carFormData.parts = [carFormData.parts];
+
+    this.carsService.addCar(carFormData).subscribe(() => {
       this.loadCars();
     });
   }
