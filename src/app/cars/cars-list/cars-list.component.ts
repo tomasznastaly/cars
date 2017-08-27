@@ -74,6 +74,10 @@ export class CarsListComponent implements OnInit, AfterViewInit {
     this.parts.push(this.buildParts());
   }
 
+  removePart(i) : void {
+    this.parts.removeAt(i);
+  }
+
   togglePlateValidity() {
     const damageControl = this.carForm.get('isFullyDamaged');
     const plateControl = this.carForm.get('plate');
