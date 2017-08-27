@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CostSharedService} from "../cost-shared.service";
 import {CarTableRowComponent} from "../car-table-row/car-table-row.component";
+import {CsValidators} from "../../shared-module/validators/cs-validators";
 
 @Component({
   selector: 'cs-cars-list',
@@ -47,7 +48,7 @@ export class CarsListComponent implements OnInit, AfterViewInit {
       deliveryDate: '',
       deadline: '',
       color: '',
-      power: '',
+      power: ['', [CsValidators.power]],
       clientFirstName: '',
       clientSurname: '',
       cost: '',
