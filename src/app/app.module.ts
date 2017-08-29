@@ -11,6 +11,8 @@ import {CarsListComponent} from "./cars/cars-list/cars-list.component";
 import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
 import {CarsRoutingModule} from "./cars/cars-routing.module";
+import {LoginRoutingModule} from "./login/login-routing.module";
+import {LoginModule} from "./login/login.module";
 
 @NgModule({
   declarations: [
@@ -21,13 +23,14 @@ import {CarsRoutingModule} from "./cars/cars-routing.module";
     FormsModule,
     HttpModule,
     CarsModule,
+    LoginModule,
     CoreModule,
     AppRoutingModule,
-    CarsRoutingModule
+    CarsRoutingModule,
+    LoginRoutingModule
   ],
   providers: [CarsService],
   bootstrap: [AppComponent]
 })
 
 export class AppModule {}
-
