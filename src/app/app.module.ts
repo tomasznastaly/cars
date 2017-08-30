@@ -13,6 +13,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {CarsRoutingModule} from "./cars/cars-routing.module";
 import {LoginRoutingModule} from "./login/login-routing.module";
 import {LoginModule} from "./login/login.module";
+import {AuthService} from "./auth/auth.service";
+import {AuthGuard} from "./auth/auth.guard";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import {LoginModule} from "./login/login.module";
     CarsRoutingModule,
     LoginRoutingModule
   ],
-  providers: [CarsService],
+  providers: [CarsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 
