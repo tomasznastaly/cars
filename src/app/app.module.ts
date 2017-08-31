@@ -25,12 +25,9 @@ import {LayoutService} from "./shared-module/services/layout.service";
     BrowserModule,
     FormsModule,
     HttpModule,
-    CarsModule,
     LoginModule,
     CoreModule,
-    AppRoutingModule,
-    CarsRoutingModule,
-    LoginRoutingModule
+    AppRoutingModule
   ],
   providers: [CarsService, AuthService, AuthGuard, LayoutService],
   bootstrap: [AppComponent]
