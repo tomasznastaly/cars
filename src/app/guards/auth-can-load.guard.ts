@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Route, CanLoad, Router } from '@angular/router';
-import { Observable } from '../../../node_modules/rxjs/Observable.d.ts';
-import {AuthService} from "./../auth/auth.service.ts";
+import { Observable } from '../../../node_modules/rxjs/Observable';
+import {AuthService} from "./../auth/auth.service";
 
 @Injectable()
 export class AuthCanLoadGuard implements CanLoad {

@@ -2,9 +2,10 @@ import {NgModule} from "@angular/core";
 import {RouterModule, Route} from "@angular/router";
 import {CarDetailsComponent} from "./car-details/car-details.component";
 import {CarResolve} from "./car-resolve.service";
-import {AuthGuard} from "../auth/auth.guard";
+import {AuthGuard} from "../guards/auth.guard";
 import {CarsListComponent} from "./cars-list/cars-list.component";
 import {CarsComponent} from "./cars.component";
+import {FormCanDeactivateGuard} from "../guards/form-can-deactivate.guard";
 
 const CARS_ROUTES : Route[] = [
   {
@@ -13,7 +14,8 @@ const CARS_ROUTES : Route[] = [
     children: [
       {
         path: '',
-        component: <any>CarsListComponent
+        component: <any>CarsListComponent,
+        canDeactivate: [FormCanDeactivateGuard]
       },
       {
         path: ':id',

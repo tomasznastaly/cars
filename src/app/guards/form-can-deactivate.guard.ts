@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from '../../../node_modules/rxjs/Observable.d';
-import {AuthService} from "./../auth/auth.service.ts";
+import {AuthService} from "./../auth/auth.service";
 
+export interface CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}
 @Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private authService : AuthService, private router : Router) {}
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-      if(this.authService.isLoggedIn()) {
-        return true;
-      }
-
-      this.router.navigate(['/login']);
-      return false;
+export class FormCanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+  canDeactivate(component : CanComponentDeactivate) {
+    return component.canDeactivate ? component.canDeactivate() : true;
   }
 }
