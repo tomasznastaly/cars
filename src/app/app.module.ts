@@ -18,6 +18,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {LayoutService} from "./shared-module/services/layout.service";
 import {AuthCanLoadGuard} from "./guards/auth-can-load.guard";
 import {FormCanDeactivateGuard} from "./guards/form-can-deactivate.guard";
+import {SharedModule} from "./shared-module/shared.module";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {FormCanDeactivateGuard} from "./guards/form-can-deactivate.guard";
     HttpModule,
     LoginModule,
     CoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [
     CarsService,
