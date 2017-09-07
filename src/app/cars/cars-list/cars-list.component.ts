@@ -1,4 +1,4 @@
-import { Component,ViewChildren, OnInit,QueryList, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChildren, OnInit,QueryList, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import {Car} from "../models/car";
 import {TotalCostComponent} from "../total-cost/total-cost.component";
 import {CarsService} from "../cars.service";
@@ -17,6 +17,7 @@ import {CanComponentDeactivate} from "../../guards/form-can-deactivate.guard";
 })
 export class CarsListComponent implements OnInit, AfterViewInit, CanComponentDeactivate {
   @ViewChild("totalCostRef") totalCostRef : TotalCostComponent;
+  @ViewChild("addCarTitle") addCarTitle : ElementRef;
   @ViewChildren(CarTableRowComponent) carRows: QueryList<CarTableRowComponent>;
   totalCost : number;
   grossCost : number;
@@ -34,6 +35,16 @@ export class CarsListComponent implements OnInit, AfterViewInit, CanComponentDea
   }
 
   ngAfterViewInit() {
+    const addCarTitle = this.addCarTitle.nativeElement;
+
+    this.carForm.valueChanges.subscribe(() => {
+      if (this.carForm.invalid) {
+        addCarTitle.style.color = 'red';
+      } else {
+        addCarTitle.style.color = 'white';
+      }
+    });
+
     this.carRows.changes.subscribe(() => {
       if (this.carRows.first.car.clientSurname === 'Kowalski') {
         console.log('Warning, Client Kowalski is next queue, better go to holidays');
