@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChildren, OnInit,QueryList, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, Renderer2, ElementRef, ViewChildren, OnInit,QueryList, AfterViewInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import {Car} from "../models/car";
 import {TotalCostComponent} from "../total-cost/total-cost.component";
 import {CarsService} from "../cars.service";
@@ -26,6 +26,7 @@ export class CarsListComponent implements OnInit, AfterViewInit, CanComponentDea
 
   constructor(private carsService : CarsService,
               private formBuilder : FormBuilder,
+              private renderer : Renderer2,
               private costSharedService : CostSharedService,
               private router : Router) {}
 
@@ -39,11 +40,12 @@ export class CarsListComponent implements OnInit, AfterViewInit, CanComponentDea
 
     this.carForm.valueChanges.subscribe(() => {
       if (this.carForm.invalid) {
-        addCarTitle.style.color = 'red';
+        this.renderer.setStyle(addCarTitle, 'color', 'red');
       } else {
-        addCarTitle.style.color = 'white';
+        this.renderer.setStyle(addCarTitle, 'color', 'white');
       }
     });
+
 
     this.carRows.changes.subscribe(() => {
       if (this.carRows.first.car.clientSurname === 'Kowalski') {
