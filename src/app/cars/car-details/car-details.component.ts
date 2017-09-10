@@ -1,4 +1,4 @@
-import { Component, Type, ComponentFactoryResolver, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, Type, ComponentFactoryResolver, OnInit, ViewContainerRef, ViewChild, ComponentRef } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CarsService} from "../cars.service";
 import {Car} from "../models/car";
@@ -14,6 +14,7 @@ export class CarDetailsComponent implements OnInit {
   @ViewChild('dateInfoContainer', {read: ViewContainerRef}) dateInfoContainer : ViewContainerRef;
   car : Car;
   carForm : FormGroup;
+  elapsedDays : number;
 
   constructor(private carsService : CarsService,
               private formBuilder : FormBuilder,
@@ -33,7 +34,14 @@ export class CarDetailsComponent implements OnInit {
 
     const dateInfoFactory = this.componentFactoryResolver
       .resolveComponentFactory(<Type<DateInfoComponent>>DateInfoComponent);
-    this.dateInfoContainer.createComponent(dateInfoFactory);
+
+    const dateInfoRef = <ComponentRef<DateInfoComponent>>this.dateInfoContainer
+      .createComponent(dateInfoFactory);
+
+    dateInfoRef.instance.car = this.car;
+    dateInfoRef.instance.checkElapsedDays.subscribe((elapsedDays) => {
+      this.elapsedDays = elapsedDays;
+    });
   }
 
   buildCarForm() {
