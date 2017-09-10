@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, Type, ComponentFactoryResolver, OnInit, ViewContainerRef, ViewChild } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CarsService} from "../cars.service";
 import {Car} from "../models/car";
 import {FormBuilder, FormGroup, Validators, FormArray} from "@angular/forms";
+import {DateInfoComponent} from "./date-info/date-info.component";
 
 @Component({
   selector: 'cs-car-details',
@@ -17,11 +18,22 @@ export class CarDetailsComponent implements OnInit {
   constructor(private carsService : CarsService,
               private formBuilder : FormBuilder,
               private router : Router,
+              private componentFactoryResolver : ComponentFactoryResolver,
               private route : ActivatedRoute) { }
 
   ngOnInit() {
     this.loadCar();
     this.carForm = this.buildCarForm();
+  }
+
+  createDateInfo() {
+    if (this.dateInfoContainer.get(0) !== null) {
+      return;
+    }
+
+    const dateInfoFactory = this.componentFactoryResolver
+      .resolveComponentFactory(<Type<DateInfoComponent>>DateInfoComponent);
+    this.dateInfoContainer.createComponent(dateInfoFactory);
   }
 
   buildCarForm() {
