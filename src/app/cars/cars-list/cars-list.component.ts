@@ -23,6 +23,7 @@ export class CarsListComponent implements OnInit, AfterViewInit, CanComponentDea
   grossCost : number;
   cars : Car[] = [];
   carForm : FormGroup;
+  counter = 0;
 
   constructor(private carsService : CarsService,
               private formBuilder : FormBuilder,
@@ -52,6 +53,11 @@ export class CarsListComponent implements OnInit, AfterViewInit, CanComponentDea
         console.log('Warning, Client Kowalski is next queue, better go to holidays');
       }
     })
+  }
+
+  ngAfterViewChecked() {
+    this.counter++;
+    console.log('this.counter', this.counter);
   }
 
   buildCarForm() {
